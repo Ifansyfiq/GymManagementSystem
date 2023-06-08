@@ -43,8 +43,6 @@
 			</form>
 			</div>
 			<!-- FORM Panel -->
-			
-			<h1>ain comel</h1>
 
 			<!-- Table Panel -->
 			<div class="col-md-8">
