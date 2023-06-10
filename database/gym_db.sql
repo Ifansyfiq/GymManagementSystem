@@ -155,7 +155,8 @@ CREATE TABLE `schedules` (
   `date_from` date NOT NULL,
   `date_to` date NOT NULL,
   `time_from` time NOT NULL,
-  `time_to` time NOT NULL
+  `time_to` time NOT NULL,
+  `remarks` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
