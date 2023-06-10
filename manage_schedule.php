@@ -57,6 +57,8 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
 						<label for="" class="control-label">Time To</label>
 						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
 					</div>
+					<div class="form-group">
+					<button class="btn float-right btn-danger mr-2" type="button" id="delete_schedule">Delete</button>	
 				</div>
 			</div>
 		</div>
@@ -91,5 +93,25 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
 			}
 		})
 	})
+	$('#delete_schedule').click(function(){
+		_conf("Are you sure to delete this schedule?","delete_schedule",[$(this).attr('data-id')])
+	})
 	
+	function delete_schedule($id){
+		start_load()
+		$.ajax({
+			url:'ajax.php?action=delete_schedule',
+			method:'POST',
+			data:{id:$id},
+			success:function(resp){
+				if(resp==1){
+					alert_toast("Data successfully deleted",'success')
+					setTimeout(function(){
+						location.reload()
+					},1500)
+
+				}
+			}
+		})
+	}
 </script>
