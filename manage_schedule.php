@@ -58,6 +58,10 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
 						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
 					</div>
 					<div class="form-group">
+						<label for="" class="control-label">Remarks</label>
+						<textarea name="remark" id="" cols="30" rows="10" class="summernote form-control"><?php echo isset($remark) ? $remark : '' ?></textarea>
+					</div>
+					<div class="form-group">
 					<button class="btn float-right btn-danger mr-2" type="button" id="delete_schedule">Delete</button>	
 				</div>
 			</div>
