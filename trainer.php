@@ -147,22 +147,27 @@
 	$('.delete_trainer').click(function(){
 		_conf("Are you sure to delete this trainer?","delete_trainer",[$(this).attr('data-id')])
 	})
-	function delete_trainer($id){
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=delete_trainer',
-			method:'POST',
-			data:{id:$id},
-			success:function(resp){
-				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
-					setTimeout(function(){
-						location.reload()
-					},1500)
-
-				}
-			}
-		})
-	}
+	function delete_trainer(id) {
+        var password = prompt("Please enter your password:");
+        if (password != null) {
+            start_load();
+            $.ajax({
+                url:'ajax.php?action=delete_trainer',
+                method:'POST',
+                data:{id:id, password:password},
+                success:function(resp){
+                    if(resp==1){
+                        alert_toast("Data successfully deleted",'success')
+                        setTimeout(function(){
+                            location.reload()
+                        },1500)
+                    } else {
+                        alert_toast("Incorrect password. Deletion failed.",'error')
+                        end_load();
+                    }
+                }
+            })
+        }
+    }
 	$('table').dataTable()
 </script>
