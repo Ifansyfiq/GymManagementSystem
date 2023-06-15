@@ -9,7 +9,7 @@ if(isset($_GET['id'])){
 
 ?>
 <div class="container-fluid">
-	<form action="" id="manage-member">
+	<form action="" id="manage-membership">
 		<div id="msg"></div>
 			<div class="form-group">
 				<label class="control-label">Member</label>
@@ -67,7 +67,7 @@ if(isset($_GET['id'])){
 		placeholder:'Select Here',
 		width:'100%'
 	})
-	$('#manage-member').submit(function(e){
+	$('#manage-membership').submit(function(e){
 		e.preventDefault()
 		start_load()
 		$.ajax({
