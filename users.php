@@ -1,6 +1,4 @@
-<?php 
-
-?>
+<?php include('db_connect.php');?>
 
 <div class="container-fluid">
 	
@@ -45,21 +43,10 @@
 				 	<td>
 				 		<?php echo $type[$row['type']] ?>
 				 	</td>
-				 	<td>
-				 		<center>
-								<div class="btn-group">
-								  <button type="button" class="btn btn-success">Action</button>
-								  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    <span class="sr-only">Toggle Dropdown</span>
-								  </button>
-								  <div class="dropdown-menu">
-								    <a class="dropdown-item edit_user" href="javascript:void(0)" data-id = '<?php echo $row['id'] ?>'>Edit</a>
-								    <div class="dropdown-divider"></div>
-								    <a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<?php echo $row['id'] ?>'>Delete</a>
-								  </div>
-								</div>
-								</center>
-				 	</td>
+				 	<td class="text-center">
+						<button class="btn btn-sm btn-outline-primary edit_user" type="button" data-id="<?php echo $row['id'] ?>" >Edit</button>
+						<button class="btn btn-sm btn-outline-danger delete_user" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
+					</td>
 				 </tr>
 				<?php endwhile; ?>
 			</tbody>
@@ -70,12 +57,13 @@
 
 </div>
 <script>
-	$('table').dataTable();
+
+$('table').dataTable();
 $('#new_user').click(function(){
 	uni_modal('New User','manage_user.php')
 })
 $('.edit_user').click(function(){
-	uni_modal('Edit User','manage_user.php?id='+$(this).attr('data-id'))
+	uni_modal("<i class='fa fa-edit'></i> Edit User","manage_user.php?id="+$(this).attr('data-id'),'mid-large')
 })
 $('.delete_user').click(function(){
 		_conf("Are you sure to delete this user?","delete_user",[$(this).attr('data-id')])
