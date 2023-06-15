@@ -27,11 +27,13 @@ if(isset($_GET['id'])){
 	<div class="row">
 		<div class="col-md-12">
 			<button class="btn float-right btn-secondary" type="button" data-dismiss="modal">Close</button>
+			<?php if ($status == 1): ?>
 			<button class="btn float-right btn-primary mr-2" type="button" id="payment">Payment</button>
-			<?php if(strtotime(date('Y-m-d')) > strtotime($end_date)): ?>
+			<?php elseif ($status == 0): ?>
 			<button class="btn float-right btn-primary mr-2" type="button" id="renew">Renew</button>
-			<?php endif; ?>
+			<?php else: ?>
 			<button class="btn float-right btn-primary mr-2" type="button" id="end">End Plan</button>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -57,10 +59,11 @@ if(isset($_GET['id'])){
 			method:'POST',
 			data:{rid:'<?php echo $id ?>'},
 			success:function(resp){
-				if(resp > 0){
-					alert_toast('Membership Successfully renewed','success')
-					end_load()
-					uni_modal("<i class='fa fa-address-card'></i> Member Plan Details","view_pdetails.php?id="+resp,'')
+				if(resp == 1){
+					alert_toast('Membership Successfully renewed','success');
+					setTimeout(function(){
+						location.reload()
+					},750)
 				}
 			}
 		})

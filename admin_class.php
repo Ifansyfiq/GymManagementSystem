@@ -386,6 +386,7 @@ Class Action {
 		}
 			return json_encode($data);
 	}
+
 	function save_payment(){
 		extract($_POST);
 		$data = '';
@@ -401,34 +402,43 @@ Class Action {
 		if($save)
 			return 1;
 	}
+
 	function renew_membership(){
 		extract($_POST);
-		$prev = $this->db->query("SELECT * FROM registration_info where id = $rid")->fetch_array();
+		$prev = $this->db->query("SELECT * FROM registration_info WHERE id = $rid")->fetch_array();
 		$data = '';
 		foreach($prev as $k=> $v){
-			if(!empty($v) && !is_numeric($k) && !in_array($k,array('id','start_date','end_date','date_created'))){
-				if(empty($data))
-				$data .= " $k='{$v}' ";
-				else
-				$data .= ", $k='{$v}' ";
-				$$k=$v;
+			if(!empty($v) && !is_numeric($k) && !in_array($k, array('id', 'start_date', 'end_date', 'date_created'))){
+				if(empty($data)){
+					$data .= " $k='{$v}' ";
+				} else {
+					$data .= ", $k='{$v}' ";
+				}
+				$$k = $v;
 			}
 		}
-				$data .= ", start_date ='".date("Y-m-d")."' ";
-				$plan = $this->db->query("SELECT * FROM plans where id = $plan_id")->fetch_array()['plan'];
-				$data .= ", end_date ='".date("Y-m-d",strtotime(date('Y-m-d').' +'.$plan.' months'))."' ";
-				$save = $this->db->query("INSERT INTO registration_info set $data");
-				if($save){
-					$id = $this->db->insert_id;
-					$this->db->query("UPDATE registration_info set status = 0 where member_id = $member_id and id != $id ");
-					return $id;
-				}
-
+			$data .= ", start_date='".date("Y-m-d")."' ";
+			$plan = $this->db->query("SELECT * FROM plans WHERE id = $plan_id")->fetch_array()['plan'];
+			$data .= ", end_date='".date("Y-m-d", strtotime(date('Y-m-d').' +'.$plan.' months'))."' ";
+			$save = $this->db->query("UPDATE registration_info 
+			SET start_date='".date("Y-m-d")."', end_date='".date("Y-m-d", strtotime(date('Y-m-d').' +'.$plan.' months'))."', status = 1 WHERE id = $rid");
+			if($save){
+				return 1;
+			}
 	}
+
 	function end_membership(){
 		extract($_POST);
 		$update = $this->db->query("UPDATE registration_info set status = 0 where id = ".$rid);
 		if($update){
+			return 1;
+		}
+	}
+
+	function delete_membership(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM registration_info where id = ".$id);
+		if($delete){
 			return 1;
 		}
 	}
@@ -445,14 +455,14 @@ Class Action {
 			$$k=$v;
 		}
 	}
-	$data .= ", start_date ='".date("Y-m-d")."' ";
-	$plan = $this->db->query("SELECT * FROM plans where id = $plan_id")->fetch_array()['plan'];
-	$data .= ", end_date ='".date("Y-m-d",strtotime(date('Y-m-d').' +'.$plan.' months'))."' ";
-	$save = $this->db->query("INSERT INTO registration_info set $data");
-	if($save){
-		$id = $this->db->insert_id;
-		$this->db->query("UPDATE registration_info set status = 0 where member_id = $member_id and id != $id ");
-		return 1;
-	}
+		$data .= ", start_date ='".date("Y-m-d")."' ";
+		$plan = $this->db->query("SELECT * FROM plans where id = $plan_id")->fetch_array()['plan'];
+		$data .= ", end_date ='".date("Y-m-d",strtotime(date('Y-m-d').' +'.$plan.' months'))."' ";
+		$save = $this->db->query("INSERT INTO registration_info set $data");
+			if($save){
+				$id = $this->db->insert_id;
+				$this->db->query("UPDATE registration_info set status = 0 where member_id = $member_id and id != $id ");
+				return 1;
+			}
 	}
 }

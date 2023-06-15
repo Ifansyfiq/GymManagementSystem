@@ -125,7 +125,7 @@ CREATE TABLE `registration_info` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `trainer_id` tinyint(30) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0=Inactive, 1= Active',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0=Inactive, 1= Pending, 2= Active',
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

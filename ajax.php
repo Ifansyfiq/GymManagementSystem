@@ -130,6 +130,11 @@ if($action == "end_membership"){
 	if($save)
 		echo $save;
 }
+if($action == "delete_membership"){
+	$save = $crud->delete_membership();
+	if($save)
+		echo $save;
+}
 if($action == "save_membership"){
 	$save = $crud->save_membership();
 	if($save)

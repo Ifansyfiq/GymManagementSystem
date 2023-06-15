@@ -58,7 +58,8 @@
 							<tbody>
 								<?php 
 								$i = 1;
-								$member =  $conn->query("SELECT r.*,p.plan,pp.package,concat(m.lastname,', ',m.firstname,' ',m.middlename) as name,m.member_id from registration_info r inner join members m on m.id = r.member_id inner join plans p on p.id = r.plan_id inner join packages pp on pp.id = r.package_id where r.status = 1 order by r.id asc");
+								$member =  $conn->query("SELECT r.*,p.plan,pp.package,concat(m.lastname,', ',m.firstname,' ',m.middlename) as name,m.member_id from registration_info r inner join members m on m.id = r.member_id 
+								inner join plans p on p.id = r.plan_id inner join packages pp on pp.id = r.package_id order by r.id asc");
 								while($row=$member->fetch_assoc()):
 								?>
 								<tr>
@@ -80,10 +81,12 @@
 										 
 									</td>
 									<td class="text-center">
-										<?php if(strtotime(date('Y-m-d')) <= strtotime($row['end_date'])): ?>
-										<span class="badge badge-success">Active</span>
+										<?php if ($row['status'] == 1): ?>
+											<span class="badge badge-warning">Pending</span>
+										<?php elseif ($row['status'] == 0): ?>
+											<span class="badge badge-danger">Inactive</span>
 										<?php else: ?>
-										<span class="badge badge-danger">Exprired</span>
+											<span class="badge badge-success">Active</span>
 										<?php endif; ?>
 									</td>
 									<td class="text-center">
@@ -112,7 +115,7 @@
 	}
 	img{
 		max-width:100px;
-		max-height: :150px;
+		max-height: 150px;
 	}
 </style>
 <script>
@@ -137,12 +140,12 @@
 	function delete_member($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_member',
+			url:'ajax.php?action=delete_membership',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){
 				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
+					alert_toast("Membership data successfully deleted",'success')
 					setTimeout(function(){
 						location.reload()
 					},1500)
