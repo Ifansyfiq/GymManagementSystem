@@ -11,51 +11,47 @@ if(isset($_GET['id'])){
 <div class="container-fluid">
 	<form action="" id="manage-member">
 		<div id="msg"></div>
-				<input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id']:'' ?>" class="form-control">
-		<div class="row form-group">
-			<div class="col-md-4">
-						<label class="control-label">ID No.</label>
-						<input type="text" name="member_id" class="form-control" value="<?php echo isset($member_id) ? $member_id:'' ?>" >
-						<small><i>Leave this blank if you want to a auto generate ID no.</i></small>
-					</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-md-4">
-				<label class="control-label">Last Name</label>
-				<input type="text" name="lastname" class="form-control" value="<?php echo isset($lastname) ? $lastname:'' ?>" required>
+			<div class="form-group">
+				<div class="col-md-12">
+					<label class="control-label">ID No.</label>
+					<input type="number" name="member_id" class="form-control" value="<?php echo isset($member_id) ? $member_id:'' ?>" >
+					<small><i>Please enter you 6 digit ID no. for future reference.</i></small>
+				<br></div>
 			</div>
-			<div class="col-md-4">
+		<div class="form-group">
+			<div class="col-md-12">
 				<label class="control-label">First Name</label>
 				<input type="text" name="firstname" class="form-control" value="<?php echo isset($firstname) ? $firstname:'' ?>" required>
-			</div>
-			<div class="col-md-4">
+			<br></div>
+			<div class="col-md-12">
 				<label class="control-label">Middle Name</label>
 				<input type="text" name="middlename" class="form-control" value="<?php echo isset($middlename) ? $middlename:'' ?>">
-			</div>
-		</div>
-		<div class="row form-group">
-			<div class="col-md-4">
+			<br></div>
+			<div class="col-md-12">
+				<label class="control-label">Last Name</label>
+				<input type="text" name="lastname" class="form-control" value="<?php echo isset($lastname) ? $lastname:'' ?>" required>
+			<br></div>
+			<div class="col-md-12">
 				<label class="control-label">Email</label>
 				<input type="email" name="email" class="form-control" value="<?php echo isset($email) ? $email:'' ?>" required>
-			</div>
-			<div class="col-md-4">
-				<label class="control-label">Contact #</label>
+			<br></div>
+			<div class="col-md-12">
+				<label class="control-label">Contact</label>
 				<input type="text" name="contact" class="form-control" value="<?php echo isset($contact) ? $contact:'' ?>" required>
-			</div>
-			<div class="col-md-4">
+			<br></div>
+			<div class="col-md-12">
 				<label class="control-label">Gender</label>
 				<select name="gender" required="" class="custom-select" id="">
 					<option <?php echo isset($gender) && $gender == 'Male' ? 'selected' : '' ?>>Male</option>
 					<option <?php echo isset($gender) && $gender == 'Female' ? 'selected' : '' ?>>Female</option>
 				</select>
-			</div>
-		</div>
-		<div class="row form-group">
+			</div><br>
 			<div class="col-md-12">
 				<label class="control-label">Address</label>
 				<textarea name="address" class="form-control"><?php echo isset($address) ? $address : '' ?></textarea>
 			</div>
 		</div>
+</div>
 		
 	</form>
 </div>

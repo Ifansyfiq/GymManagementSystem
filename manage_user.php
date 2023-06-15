@@ -1,12 +1,12 @@
-<?php 
-include('db_connect.php');
-session_start();
+<?php include 'db_connect.php' ?>
+<?php
 if(isset($_GET['id'])){
-$user = $conn->query("SELECT * FROM users where id =".$_GET['id']);
-foreach($user->fetch_array() as $k =>$v){
-	$meta[$k] = $v;
+	$qry = $conn->query("SELECT * FROM users where id=".$_GET['id'])->fetch_array();
+	foreach($qry as $k =>$v){
+		$$k = $v;
+	}
 }
-}
+
 ?>
 <div class="container-fluid">
 	<div id="msg"></div>
@@ -45,6 +45,7 @@ foreach($user->fetch_array() as $k =>$v){
 
 	</form>
 </div>
+
 <script>
 	
 	$('#manage-user').submit(function(e){
