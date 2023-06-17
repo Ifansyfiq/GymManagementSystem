@@ -4,38 +4,38 @@
 	
 	<div class="col-lg-12">
 		<div class="row">
-			<!-- FORM Panel -->
+			<!-- Form Panel -->
 			<div class="col-md-4">
 			<form action="" id="manage-plan">
 				<div class="card">
 					<div class="card-header">
-						    Plan Form
+						    Plan Activation Form
 				  	</div>
 					<div class="card-body">
 							<input type="hidden" name="id">
 							<div class="form-group">
-								<label class="control-label">Plan (months)</label>
-								<input type="number" class="form-control" min="1" name="plan" >
+								<label class="control-label">Duration of Plan (months)</label>
+								<input type="number" type="integer" class="form-control" min="1" name="plan" required >
 							</div>
 							<div class="form-group">
-								<label class="control-label">Amount</label>
-								<input type="number" class="form-control" step="any" name="amount">
+								<label class="control-label">Purchase Amount</label>
+								<input type="number" type="integer" class="form-control" min="1" name="amount" required>
 							</div>
 							
 					</div>
 							
-					<div class="card-footer">
+					<div class="card-header">
 						<div class="row">
 							<div class="col-md-12">
-								<button class="btn btn-md btn-success col-sm-3 offset-md-3"> Save</button>
-								<button class="btn btn-md btn-secondary col-sm-3" type="button" onclick="_reset()"> Cancel</button>
+							<button class="btn btn-md btn-secondary col-sm-3 offset-md-3" type="button" onclick="_reset()"> Reset</button>
+							<button class="btn btn-md btn-success col-sm-3 offset"> Save</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</form>
 			</div>
-			<!-- FORM Panel -->
+			<!-- Form Panel -->
 
 			<!-- Table Panel -->
 			<div class="col-md-8">
@@ -47,13 +47,13 @@
 						<table class="table table-bordered table-hover">
 							<colgroup>
 								<col width="5%">
-								<col width="55%">
+								<col width="25%">
 								<col width="20%">
 								<col width="20%">
 							</colgroup>
 							<thead>
 								<tr>
-									<th class="text-center">#</th>
+									<th class="text-center">No </th>
 									<th class="text-center">Plan</th>
 									<th class="text-center">Amount</th>
 									<th class="text-center">Action</th>
@@ -67,14 +67,15 @@
 								?>
 								<tr>
 									<td class="text-center"><?php echo $i++ ?></td>
-									<td class="">
+									<td class="text-center">
 										<p><b><?php echo $row['plan'] ?></b> month/s</p>
 									</td>
-									<td class="text-right">
-										<b><?php echo number_format($row['amount'],2) ?></b>
+									<td class="text-center">
+										<b><?php echo number_format($row['amount']) ?></b>
 									</td>
 									<td class="text-center">
-										<button class="btn btn-md btn-outline-success edit_plan" type="button" data-id="<?php echo $row['id'] ?>" data-plan="<?php echo $row['plan'] ?>" data-description="<?php echo $row['description'] ?>" data-amount="<?php echo $row['amount'] ?>" >Edit</button>
+										<button class="btn btn-md btn-outline-success edit_plan" type="button" data-id="<?php echo $row['id'] ?>" data-plan="<?php echo $row['plan'] 
+										 ?>" data-amount="<?php echo $row['amount'] ?>" >Edit</button>
 										<button class="btn btn-md btn-outline-danger delete_plan" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
 									</td>
 								</tr>
